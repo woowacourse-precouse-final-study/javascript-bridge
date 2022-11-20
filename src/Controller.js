@@ -34,10 +34,18 @@ class Controller {
 			const { isSurvive, currentLocation, answerBridge, currentUserBridge } = this.bridgeGameModel.state;
 			this.bridgeGameView.OutputView.printMap(currentUserBridge);
 
-			if (isSurvive && currentLocation !== answerBridge.length) {
-				this.playRound();
-			} else {
-				console.log('finish');
+			if (!isSurvive) {
+				this.chooseRetryOrEnd();
+			} 		
+		});
+	}
+
+	chooseRetryOrEnd() {
+		this.bridgeGameView.InputView.readGameCommand(commandInput => {
+			if (commandInput === 'R') {
+				//retry
+			} else if (commandInput === 'Q') {
+				//end game
 			}
 		});
 	}

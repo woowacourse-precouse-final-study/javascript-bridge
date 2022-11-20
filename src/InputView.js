@@ -18,16 +18,21 @@ const InputView = {
 	 * 사용자가 이동할 칸을 입력받는다.
 	 */
 	readMoving(moveController) {
-			Console.readLine(GAME_GUIDE_MESSAGES.MOVE_INPUT, directionInput => {
-				Console.print('\n');
-				moveController(directionInput);
-			});
+		Console.readLine(GAME_GUIDE_MESSAGES.MOVE_INPUT, directionInput => {
+			Console.print('\n');
+			moveController(directionInput);
+		});
 	},
 
 	/**
 	 * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
 	 */
-	readGameCommand() {},
+	readGameCommand(commandController) {
+		Console.readLine(GAME_GUIDE_MESSAGES.COMMAND_INPUT, commandInput => {
+			Console.print('\n');
+			commandController(commandInput);
+		});
+	},
 };
 
 module.exports = InputView;
