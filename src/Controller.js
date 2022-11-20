@@ -30,6 +30,14 @@ class Controller {
 	playRound() {
 		this.bridgeGameView.InputView.readMoving(directionInput => {
 			this.bridgeGameModel.move(directionInput);
+
+			const { isSurvive, currentLocation, answerBridge } = this.bridgeGameModel.state;
+
+			if (isSurvive && currentLocation !== answerBridge.length) {
+				this.playRound();
+			} else {
+				console.log('finish');
+			}
 		});
 	}
 }
