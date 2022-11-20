@@ -73,7 +73,7 @@ class BridgeGame {
 	 */
 	retry() {
 		this.setState({
-			trial: this.state.trials + 1,
+			trials: this.state.trials + 1,
 			isSurvive: true,
 			currentLocation: 0,
 			currentUserBridge: { up: [], down: [] },
