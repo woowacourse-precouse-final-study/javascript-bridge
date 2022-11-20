@@ -12,7 +12,6 @@ const InputView = {
 	 */
 	readBridgeSize(createBridgeController) {
 		readLine(GAME_GUIDE_MESSAGES.LENGHT_INPUT, sizeInput => {
-			print('\n');
 			createBridgeController(sizeInput);
 		});
 	},
@@ -21,7 +20,6 @@ const InputView = {
 	 */
 	readMoving(moveController) {
 		readLine(GAME_GUIDE_MESSAGES.MOVE_INPUT, directionInput => {
-			print('\n');
 			moveController(directionInput);
 		});
 	},
@@ -31,7 +29,6 @@ const InputView = {
 	 */
 	readGameCommand(commandController) {
 		readLine(GAME_GUIDE_MESSAGES.COMMAND_INPUT, commandInput => {
-			print('\n');
 			commandController(commandInput);
 		});
 	},
