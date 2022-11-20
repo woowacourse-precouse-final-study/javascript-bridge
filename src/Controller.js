@@ -11,6 +11,10 @@ class Controller {
 			InputView,
 		};
 	}
+
+	start() {
+		this.bridgeGameView.OutputView.printMessage(GAME_GUIDE_MESSAGES.START);
+	}
 }
 
 module.exports = {
