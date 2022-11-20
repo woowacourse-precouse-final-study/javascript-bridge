@@ -31,8 +31,6 @@ class BridgeGame {
 		const isAnswer = directionInput === answerBridge[currentLocation];
 		this.updateStatus(isAnswer);
 		this.generateCurrentUserBridge(isAnswer, directionInput);
-
-		console.log(this.state);
 	}
 
 	generateCurrentUserBridge(isAnswer, directionInput) {
