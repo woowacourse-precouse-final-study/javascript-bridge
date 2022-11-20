@@ -30,6 +30,7 @@ const OutputView = {
 	printResult(state) {
 		const { trials, isSurvive, currentUserBridge } = state;
 
+		print('\n');
 		print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
 		this.printMap(currentUserBridge);
 		print('\n');
