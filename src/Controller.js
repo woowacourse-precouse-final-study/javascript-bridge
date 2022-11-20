@@ -36,16 +36,17 @@ class Controller {
 
 			if (!isSurvive) {
 				this.chooseRetryOrEnd();
-			} 		
+			}
 		});
 	}
 
 	chooseRetryOrEnd() {
 		this.bridgeGameView.InputView.readGameCommand(commandInput => {
 			if (commandInput === 'R') {
-				//retry
+				this.bridgeGameModel.retry();
+				this.playRound();
 			} else if (commandInput === 'Q') {
-				//end game
+				// end game
 			}
 		});
 	}
