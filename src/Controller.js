@@ -4,6 +4,7 @@ const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { GAME_GUIDE_MESSAGES } = require('./constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { Console } = require('@woowacourse/mission-utils');
 
 class Controller {
 	constructor() {
@@ -36,6 +37,10 @@ class Controller {
 
 			if (!isSurvive) {
 				this.chooseRetryOrEnd();
+			} else if (currentLocation === answerBridge.length)		{
+				this.endGame();
+			} else {
+				this.playRound();
 			}
 		});
 	}
@@ -46,9 +51,13 @@ class Controller {
 				this.bridgeGameModel.retry();
 				this.playRound();
 			} else if (commandInput === 'Q') {
-				// end game
+				this.endGame();
 			}
 		});
+	}
+
+	endGame() {
+		Console.close();
 	}
 }
 
