@@ -57,6 +57,7 @@ class Controller {
 	}
 
 	endGame() {
+		this.bridgeGameView.OutputView.printResult(this.bridgeGameModel.state);
 		Console.close();
 	}
 }

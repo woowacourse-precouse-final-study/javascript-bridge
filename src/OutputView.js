@@ -15,7 +15,7 @@ const OutputView = {
 	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
 	printMap(currentUserBridge) {
-		const {up, down} = currentUserBridge;
+		const { up, down } = currentUserBridge;
 		Console.print(`[ ${up.join(' | ')} ]`);
 		Console.print(`[ ${down.join(' | ')} ]`);
 	},
@@ -25,7 +25,15 @@ const OutputView = {
 	 * <p>
 	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
-	printResult() {},
+	printResult(state) {
+		const { trials, isSurvive, currentUserBridge } = state;
+
+		Console.print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
+		this.printMap(currentUserBridge);
+		Console.print('\n');
+		Console.print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}: ${isSurvive ? '성공' : '실패'}`);
+		Console.print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}: ${trials}`);
+	},
 };
 
 module.exports = OutputView;
