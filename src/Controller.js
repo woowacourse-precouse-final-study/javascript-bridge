@@ -8,36 +8,36 @@ const { GAME_GUIDE_MESSAGES } = require('./constants');
 
 class Controller {
 	constructor() {
-		this.bridgeGameModel = new BridgeGame();
-		this.bridgeGameView = {
-			OutputView,
-			InputView,
+		this.model = new BridgeGame();
+		this.view = {
+			output: OutputView,
+			input: InputView,
 		};
 	}
 
 	start() {
-		this.bridgeGameView.OutputView.printMessage(GAME_GUIDE_MESSAGES.START);
+		this.view.output.printMessage(GAME_GUIDE_MESSAGES.START);
 		this.createBridge();
 	}
 
 	createBridge() {
-		this.bridgeGameView.InputView.readBridgeSize(sizeInput => {
+		this.view.input.readBridgeSize(sizeInput => {
 			const answerBridge = BridgeMaker.makeBridge(Number(sizeInput), BridgeRandomNumberGenerator.generate);
-			this.bridgeGameModel.setState({ answerBridge });
+			this.model.setState({ answerBridge });
 			this.playRound();
 		});
 	}
 
 	playRound() {
-		this.bridgeGameView.InputView.readMoving(directionInput => {
-			this.bridgeGameModel.move(directionInput);
+		this.view.input.readMoving(directionInput => {
+			this.model.move(directionInput);
 
-			const { isSurvive, currentLocation, answerBridge, currentUserBridge } = this.bridgeGameModel.state;
-			this.bridgeGameView.OutputView.printMap(currentUserBridge);
+			const { isSurvive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
+			this.view.output.printMap(currentUserBridge);
 
 			if (!isSurvive) {
 				this.chooseRetryOrEnd();
-			} else if (currentLocation === answerBridge.length)		{
+			} else if (currentLocation === answerBridge.length) {
 				this.endGame();
 			} else {
 				this.playRound();
@@ -46,9 +46,9 @@ class Controller {
 	}
 
 	chooseRetryOrEnd() {
-		this.bridgeGameView.InputView.readGameCommand(commandInput => {
+		this.view.input.readGameCommand(commandInput => {
 			if (commandInput === 'R') {
-				this.bridgeGameModel.retry();
+				this.model.retry();
 				this.playRound();
 			} else if (commandInput === 'Q') {
 				this.endGame();
@@ -57,7 +57,7 @@ class Controller {
 	}
 
 	endGame() {
-		this.bridgeGameView.OutputView.printResult(this.bridgeGameModel.state);
+		this.view.output.printResult(this.model.state);
 		Console.close();
 	}
 }
