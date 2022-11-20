@@ -5,7 +5,7 @@ class BridgeGame {
 	#state = {
 		answerBridge: null,
 		trials: 1,
-		isSurvive: true,
+		isAlive: true,
 		currentLocation: 0,
 		currentUserBridge: {
 			up: [],
@@ -29,7 +29,7 @@ class BridgeGame {
 	move(directionInput) {
 		const { answerBridge, currentLocation } = this.state;
 		const isAnswer = directionInput === answerBridge[currentLocation];
-		this.changeStatus(isAnswer);
+		this.updateStatus(isAnswer);
 		this.generateCurrentUserBridge(isAnswer, directionInput);
 
 		console.log(this.state);
@@ -59,11 +59,11 @@ class BridgeGame {
 		}
 	}
 
-	changeStatus(isAnswer) {
+	updateStatus(isAnswer) {
 		const newCurrentLocation = (this.state.currentLocation += 1);
-		const newSurvivalSatus = isAnswer ? true : false;
+		const newSurvivalStatus = isAnswer ? true : false;
 
-		this.setState({ currentLocation: newCurrentLocation, isSurvive: newSurvivalSatus });
+		this.setState({ currentLocation: newCurrentLocation, isAlive: newSurvivalStatus });
 	}
 
 	/**
@@ -74,7 +74,7 @@ class BridgeGame {
 	retry() {
 		this.setState({
 			trials: this.state.trials + 1,
-			isSurvive: true,
+			isAlive: true,
 			currentLocation: 0,
 			currentUserBridge: { up: [], down: [] },
 		});

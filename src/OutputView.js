@@ -28,13 +28,13 @@ const OutputView = {
 	 * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
 	 */
 	printResult(state) {
-		const { trials, isSurvive, currentUserBridge } = state;
+		const { trials, isAlive, currentUserBridge } = state;
 
 		print('\n');
 		print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
 		this.printMap(currentUserBridge);
 		print('\n');
-		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}: ${isSurvive ? '성공' : '실패'}`);
+		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}: ${isAlive ? '성공' : '실패'}`);
 		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}: ${trials}`);
 	},
 };

@@ -32,10 +32,10 @@ class Controller {
 		this.view.input.readMoving(directionInput => {
 			this.model.move(directionInput);
 
-			const { isSurvive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
+			const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
 			this.view.output.printMap(currentUserBridge);
 
-			if (!isSurvive) {
+			if (!isAlive) {
 				this.chooseRetryOrEnd();
 			} else if (currentLocation === answerBridge.length) {
 				this.endGame();
