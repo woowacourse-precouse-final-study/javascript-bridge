@@ -31,7 +31,8 @@ class Controller {
 		this.bridgeGameView.InputView.readMoving(directionInput => {
 			this.bridgeGameModel.move(directionInput);
 
-			const { isSurvive, currentLocation, answerBridge } = this.bridgeGameModel.state;
+			const { isSurvive, currentLocation, answerBridge, currentUserBridge } = this.bridgeGameModel.state;
+			this.bridgeGameView.OutputView.printMap(currentUserBridge);
 
 			if (isSurvive && currentLocation !== answerBridge.length) {
 				this.playRound();
