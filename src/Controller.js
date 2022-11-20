@@ -23,6 +23,13 @@ class Controller {
 		this.bridgeGameView.InputView.readBridgeSize(sizeInput => {
 			const answerBridge = BridgeMaker.makeBridge(Number(sizeInput), BridgeRandomNumberGenerator.generate);
 			this.bridgeGameModel.setState({ answerBridge });
+			this.playRound();
+		});
+	}
+
+	playRound() {
+		this.bridgeGameView.InputView.readMoving(directionInput => {
+			this.bridgeGameModel.move(directionInput);
 		});
 	}
 }
