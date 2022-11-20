@@ -1,10 +1,10 @@
 const BridgeGame = require('./BridgeGame');
-const BridgeMaker = require('./BridgeMaker');
-const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
-const { GAME_GUIDE_MESSAGES } = require('./constants');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const BridgeMaker = require('./BridgeMaker');
+const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_GUIDE_MESSAGES } = require('./constants');
 
 class Controller {
 	constructor() {
