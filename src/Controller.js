@@ -5,7 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_GUIDE_MESSAGES, COMMAND } = require('./constants');
-const { lengthInputValidation, directionInputValidation, commandInputValidation } = require('./validation');
+const { lengthInputValidation, directionInputValidation, commandInputValidation, validation } = require('./validation');
 
 class Controller {
 	constructor() {
@@ -23,7 +23,7 @@ class Controller {
 
 	createBridge() {
 		this.view.input.readBridgeSize(sizeInput => {
-			const size = lengthInputValidation(sizeInput);
+			const size = validation(sizeInput, lengthInputValidation, this.createBridge.bind(this));
 			const answerBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
 			this.model.setState({ answerBridge });
 			this.playRound();
@@ -32,7 +32,7 @@ class Controller {
 
 	playRound() {
 		this.view.input.readMoving(directionInput => {
-			const direction = directionInputValidation(directionInput);
+			const direction = validation(directionInput, directionInputValidation, this.playRound.bind(this));
 			this.model.move(direction);
 
 			const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
@@ -50,7 +50,7 @@ class Controller {
 
 	chooseRetryOrEnd() {
 		this.view.input.readGameCommand(commandInput => {
-			const command = commandInputValidation(commandInput);
+			const command = validation(commandInput, commandInputValidation, this.chooseRetryOrEnd.bind(this));
 
 			if (command === COMMAND.RESTART) {
 				this.model.retry();

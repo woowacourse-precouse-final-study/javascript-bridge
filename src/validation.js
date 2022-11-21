@@ -1,4 +1,18 @@
 const { ERROR_MESSAGE, DIRECTION, LENGTH_RANGE, COMMAND } = require('./constants');
+const { Console } = require('@woowacourse/mission-utils');
+
+const validation = (input, validationFunc, retryFunc) => {
+	let validatedInput;
+
+	try {
+		validatedInput = validationFunc(input);
+	} catch (err) {
+		Console.print(err.message);
+		retryFunc();
+	}
+
+	return validatedInput;
+};
 
 const lengthInputValidation = strLength => {
 	const length = parseInt(strLength);
@@ -16,7 +30,7 @@ const lengthInputValidation = strLength => {
 const directionInputValidation = directionInput => {
 	const direction = directionInput.replace(/\s/g, '').toUpperCase();
 	const { UP, DOWN } = DIRECTION;
-	
+
 	if (direction !== UP && direction !== DOWN) {
 		throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([UP, DOWN]));
 	}
@@ -36,6 +50,7 @@ const commandInputValidation = commandInput => {
 };
 
 module.exports = {
+	validation,
 	lengthInputValidation,
 	directionInputValidation,
 	commandInputValidation,
