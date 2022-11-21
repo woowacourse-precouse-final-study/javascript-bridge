@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, LENGTH_RANGE } = require('./constants');
+const { ERROR_MESSAGE, DIRECTION, LENGTH_RANGE } = require('./constants');
 
 const lengthInputValidation = strLength => {
 	const length = parseInt(strLength);
@@ -13,6 +13,18 @@ const lengthInputValidation = strLength => {
 	return length;
 };
 
+const directionInputValidation = directionInput => {
+	const direction = directionInput.replace(/\s/g, '').toUpperCase();
+	const { UP, DOWN } = DIRECTION;
+	
+	if (direction !== UP && direction !== DOWN) {
+		throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([UP, DOWN]));
+	}
+
+	return direction;
+};
+
 module.exports = {
 	lengthInputValidation,
+	directionInputValidation,
 };

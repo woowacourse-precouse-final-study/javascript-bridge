@@ -5,7 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_GUIDE_MESSAGES } = require('./constants');
-const { lengthInputValidation } = require('./validation');
+const { lengthInputValidation, directionInputValidation } = require('./validation');
 
 class Controller {
 	constructor() {
@@ -32,7 +32,8 @@ class Controller {
 
 	playRound() {
 		this.view.input.readMoving(directionInput => {
-			this.model.move(directionInput);
+			const direction = directionInputValidation(directionInput);
+			this.model.move(direction);
 
 			const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
 			this.view.output.printMap(currentUserBridge);
