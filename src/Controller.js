@@ -4,8 +4,8 @@ const OutputView = require('./OutputView');
 const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_GUIDE_MESSAGES } = require('./constants');
-const { lengthInputValidation, directionInputValidation } = require('./validation');
+const { GAME_GUIDE_MESSAGES, COMMAND } = require('./constants');
+const { lengthInputValidation, directionInputValidation, commandInputValidation } = require('./validation');
 
 class Controller {
 	constructor() {
@@ -50,10 +50,12 @@ class Controller {
 
 	chooseRetryOrEnd() {
 		this.view.input.readGameCommand(commandInput => {
-			if (commandInput === 'R') {
+			const command = commandInputValidation(commandInput);
+
+			if (command === COMMAND.RESTART) {
 				this.model.retry();
 				this.playRound();
-			} else if (commandInput === 'Q') {
+			} else if (command === COMMAND.QUIT) {
 				this.endGame();
 			}
 		});

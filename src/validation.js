@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, DIRECTION, LENGTH_RANGE } = require('./constants');
+const { ERROR_MESSAGE, DIRECTION, LENGTH_RANGE, COMMAND } = require('./constants');
 
 const lengthInputValidation = strLength => {
 	const length = parseInt(strLength);
@@ -24,7 +24,19 @@ const directionInputValidation = directionInput => {
 	return direction;
 };
 
+const commandInputValidation = commandInput => {
+	const command = commandInput.replace(/\s/g, '').toUpperCase();
+	const { RESTART, QUIT } = COMMAND;
+
+	if (command !== RESTART && command !== QUIT) {
+		throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([RESTART, QUIT]));
+	}
+
+	return command;
+};
+
 module.exports = {
 	lengthInputValidation,
 	directionInputValidation,
+	commandInputValidation,
 };
