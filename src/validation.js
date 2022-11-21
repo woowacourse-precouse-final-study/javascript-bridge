@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, LENGTH } = require('./constants');
+const { ERROR_MESSAGE, LENGTH_RANGE } = require('./constants');
 
 const lengthInputValidation = strLength => {
 	const length = parseInt(strLength);
@@ -6,7 +6,8 @@ const lengthInputValidation = strLength => {
 		throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
 	}
 	if (length < 3 || length > 20) {
-		throw new Error(ERROR_MESSAGE.INVALID_RANGE(LENGTH.MIN, LENGTH.MAX));
+		const { MIN, MAX } = LENGTH_RANGE;
+		throw new Error(ERROR_MESSAGE.INVALID_RANGE(MIN, MAX));
 	}
 
 	return length;

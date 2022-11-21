@@ -12,7 +12,7 @@ const GAME_GUIDE_MESSAGES = {
 
 const ERROR_MESSAGE = {
 	INVALID_NUMBER: '[ERROR] 유효한 숫자를 입력해주세요.',
-	INVALID_RANGE: (MAX, MIN) => `[ERROR] ${MIN} 이상 ${MAX} 이하인 숫자를 입력해주세요.`,
+	INVALID_RANGE: (MIN, MAX) => `[ERROR] ${MIN} 이상 ${MAX} 이하인 숫자를 입력해주세요.`,
 };
 
 const DIRECTION = {
