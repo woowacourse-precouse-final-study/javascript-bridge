@@ -5,6 +5,7 @@ const BridgeMaker = require('./BridgeMaker');
 const BridgeRandomNumberGenerator = require('./BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_GUIDE_MESSAGES } = require('./constants');
+const { lengthInputValidation } = require('./validation');
 
 class Controller {
 	constructor() {
@@ -22,7 +23,8 @@ class Controller {
 
 	createBridge() {
 		this.view.input.readBridgeSize(sizeInput => {
-			const answerBridge = BridgeMaker.makeBridge(Number(sizeInput), BridgeRandomNumberGenerator.generate);
+			const size = lengthInputValidation(sizeInput);
+			const answerBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
 			this.model.setState({ answerBridge });
 			this.playRound();
 		});
