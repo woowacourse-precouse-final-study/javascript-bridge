@@ -30,12 +30,11 @@ const OutputView = {
 	printResult(state) {
 		const { trials, isAlive, currentUserBridge } = state;
 
-		print('\n');
 		print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
 		this.printMap(currentUserBridge);
 		print('\n');
-		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}: ${isAlive ? '성공' : '실패'}`);
-		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}: ${trials}`);
+		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}${isAlive ? '성공' : '실패'}`);
+		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}${trials}`);
 	},
 };
 
