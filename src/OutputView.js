@@ -1,6 +1,4 @@
-const {
-	Console: { print },
-} = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { GAME_GUIDE_MESSAGES } = require('./constants');
 
 /**
@@ -8,7 +6,7 @@ const { GAME_GUIDE_MESSAGES } = require('./constants');
  */
 const OutputView = {
 	printMessage(message) {
-		print(message);
+		Console.print(message);
 	},
 
 	/**
@@ -18,8 +16,8 @@ const OutputView = {
 	 */
 	printMap(currentUserBridge) {
 		const { up, down } = currentUserBridge;
-		print(`[ ${up.join(' | ')} ]`);
-		print(`[ ${down.join(' | ')} ]`);
+		Console.print(`[ ${up.join(' | ')} ]`);
+		Console.print(`[ ${down.join(' | ')} ]`);
 	},
 
 	/**
@@ -30,11 +28,11 @@ const OutputView = {
 	printResult(state) {
 		const { trials, isAlive, currentUserBridge } = state;
 
-		print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
+		Console.print(GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.MESSAGE);
 		this.printMap(currentUserBridge);
-		print('\n');
-		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}${isAlive ? '성공' : '실패'}`);
-		print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}${trials}`);
+		Console.print('\n');
+		Console.print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.RESULT}${isAlive ? '성공' : '실패'}`);
+		Console.print(`${GAME_GUIDE_MESSAGES.FINAL_RESULT_OUTPUT.TRIALS}${trials}`);
 	},
 };
 

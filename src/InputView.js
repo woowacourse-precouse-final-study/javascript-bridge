@@ -1,6 +1,4 @@
-const {
-	Console: { readLine, print },
-} = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { GAME_GUIDE_MESSAGES } = require('./constants');
 
 /**
@@ -11,7 +9,7 @@ const InputView = {
 	 * 다리의 길이를 입력받는다.
 	 */
 	readBridgeSize(createBridgeController) {
-		readLine(GAME_GUIDE_MESSAGES.LENGHT_INPUT, sizeInput => {
+		Console.readLine(GAME_GUIDE_MESSAGES.LENGHT_INPUT, sizeInput => {
 			createBridgeController(sizeInput);
 		});
 	},
@@ -19,7 +17,7 @@ const InputView = {
 	 * 사용자가 이동할 칸을 입력받는다.
 	 */
 	readMoving(moveController) {
-		readLine(GAME_GUIDE_MESSAGES.MOVE_INPUT, directionInput => {
+		Console.readLine(GAME_GUIDE_MESSAGES.MOVE_INPUT, directionInput => {
 			moveController(directionInput);
 		});
 	},
@@ -28,7 +26,7 @@ const InputView = {
 	 * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
 	 */
 	readGameCommand(commandController) {
-		readLine(GAME_GUIDE_MESSAGES.COMMAND_INPUT, commandInput => {
+		Console.readLine(GAME_GUIDE_MESSAGES.COMMAND_INPUT, commandInput => {
 			commandController(commandInput);
 		});
 	},
