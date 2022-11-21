@@ -10,6 +10,30 @@ const GAME_GUIDE_MESSAGES = {
 	},
 };
 
+const ERROR_MESSAGE = {
+	INVALID_NUMBER: '[ERROR] 유효한 숫자를 입력해주세요.',
+	INVALID_RANGE: (MAX, MIN) => `[ERROR] ${MIN} 이상 ${MAX} 이하인 숫자를 입력해주세요.`,
+};
+
+const DIRECTION = {
+	UP: 'U',
+	DOWN: 'D',
+};
+
+const COMMAND = {
+	RESTART: 'R',
+	QUIT: 'Q',
+};
+
+const LENGTH_RANGE = {
+	MIN: 3,
+	MAX: 20,
+};
+
 module.exports = {
 	GAME_GUIDE_MESSAGES,
+	ERROR_MESSAGE,
+	DIRECTION,
+	COMMAND,
+	LENGTH_RANGE,
 };
