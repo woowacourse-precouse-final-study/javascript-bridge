@@ -13,7 +13,7 @@ const GAME_GUIDE_MESSAGES = {
 const ERROR_MESSAGE = {
 	INVALID_NUMBER: '[ERROR] 유효한 숫자를 입력해주세요.',
 	INVALID_RANGE: (MIN, MAX) => `[ERROR] ${MIN} 이상 ${MAX} 이하인 숫자를 입력해주세요.`,
-	INVALID_INPUT_CHOICE: (choices) => `[ERROR] ${choices.map(choice => choice).join(', ')} 중 하나를 입력해주세요.`
+	INVALID_INPUT_CHOICE: choices => `[ERROR] ${choices.map(choice => choice).join(', ')} 중 하나를 입력해주세요.`,
 };
 
 const DIRECTION = {
@@ -31,10 +31,22 @@ const LENGTH_RANGE = {
 	MAX: 20,
 };
 
+const STEPS = {
+	ANSWER: {
+		U: ['O', ' '],
+		D: [' ', 'O'],
+	},
+	WRONG: {
+		U: ['X', ' '],
+		D: [' ', 'X'],
+	},
+};
+
 module.exports = {
 	GAME_GUIDE_MESSAGES,
 	ERROR_MESSAGE,
 	DIRECTION,
 	COMMAND,
 	LENGTH_RANGE,
+	STEPS,
 };

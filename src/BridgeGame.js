@@ -1,3 +1,5 @@
+const { STEPS } = require('./constants');
+
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -34,27 +36,15 @@ class BridgeGame {
 	}
 
 	generateCurrentUserBridge(isAnswer, directionInput) {
-		if (isAnswer) {
-			if (directionInput === 'U') {
-				const newUp = [...this.state.currentUserBridge.up, 'O'];
-				const newDown = [...this.state.currentUserBridge.down, ' '];
-				this.setState({ currentUserBridge: { up: newUp, down: newDown } });
-			} else if (directionInput === 'D') {
-				const newUp = [...this.state.currentUserBridge.up, ' '];
-				const newDown = [...this.state.currentUserBridge.down, 'O'];
-				this.setState({ currentUserBridge: { up: newUp, down: newDown } });
-			}
-		} else {
-			if (directionInput === 'U') {
-				const newUp = [...this.state.currentUserBridge.up, 'X'];
-				const newDown = [...this.state.currentUserBridge.down, ' '];
-				this.setState({ currentUserBridge: { up: newUp, down: newDown } });
-			} else if (directionInput === 'D') {
-				const newUp = [...this.state.currentUserBridge.up, ' '];
-				const newDown = [...this.state.currentUserBridge.down, 'X'];
-				this.setState({ currentUserBridge: { up: newUp, down: newDown } });
-			}
-		}
+		const answer = isAnswer ? 'ANSWER' : 'WRONG';
+		const [newUp, newDown] = STEPS[answer][directionInput];
+
+		this.setState({
+			currentUserBridge: {
+				up: [...this.state.currentUserBridge.up, newUp],
+				down: [...this.state.currentUserBridge.down, newDown],
+			},
+		});
 	}
 
 	updateStatus(isAnswer) {
