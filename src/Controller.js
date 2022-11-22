@@ -36,16 +36,21 @@ class Controller {
 			this.model.move(direction);
 
 			const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
-			this.view.output.printMap(currentUserBridge);
+			const isEnd = currentLocation === answerBridge.length;
 
-			if (!isAlive) {
-				this.chooseRetryOrEnd();
-			} else if (currentLocation === answerBridge.length) {
-				this.endGame();
-			} else {
-				this.playRound();
-			}
+			this.view.output.printMap(currentUserBridge);
+			this.chooseNextStep(isAlive, isEnd);
 		});
+	}
+
+	chooseNextStep(isAlive, isEnd) {
+		if (!isAlive) {
+			this.chooseRetryOrEnd();
+		} else if (isEnd) {
+			this.endGame();
+		} else {
+			this.playRound();
+		}
 	}
 
 	chooseRetryOrEnd() {
