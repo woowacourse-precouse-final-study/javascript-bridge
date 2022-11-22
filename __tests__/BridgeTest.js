@@ -90,7 +90,7 @@ describe('다리 건너기 테스트', () => {
 		expectBridgeOrder(log, '[ O | O | O ]', '[   |   |   ]');
 	});
 
-    test('방향 입력시 U / D 제외한 문자를 입력해도 종료되지 않고 다시 입력해야 한다.', () => {
+	test('방향 입력시 U / D 제외한 문자를 입력해도 종료되지 않고 다시 입력해야 한다.', () => {
 		const logSpy = getLogSpy();
 
 		mockRandoms([1, 1, 1]);
@@ -110,7 +110,7 @@ describe('다리 건너기 테스트', () => {
 		expectBridgeOrder(log, '[ O | O | O ]', '[   |   |   ]');
 	});
 
-  test('방향 또는 명령어 입력시 소문자를 입력해도 정상 작동한다.', () => {
+	test('방향 또는 명령어 입력시 소문자를 입력해도 정상 작동한다.', () => {
 		const logSpy = getLogSpy();
 
 		mockRandoms([1, 1, 1]);
@@ -130,7 +130,7 @@ describe('다리 건너기 테스트', () => {
 		expectBridgeOrder(log, '[ O | O | O ]', '[   |   |   ]');
 	});
 
-    test('재시도한 후 바로 실패하고 종료할 경우 잘못 건넌 한칸만 찍히고 실패 출력한다.', () => {
+	test('재시도한 후 바로 실패하고 종료할 경우 잘못 건넌 한칸만 찍히고 실패 출력한다.', () => {
 		const logSpy = getLogSpy();
 
 		mockRandoms([1, 1, 1]);
@@ -140,22 +140,106 @@ describe('다리 건너기 테스트', () => {
 		app.play();
 
 		const log = getOutput(logSpy);
-		expectLogContains(log, [
-			'최종 게임 결과',
-			'[   ]',
-			'[ X ]',
-			'게임 성공 여부: 실패',
-			'총 시도한 횟수: 2',
-		]);
+		expectLogContains(log, ['최종 게임 결과', '[   ]', '[ X ]', '게임 성공 여부: 실패', '총 시도한 횟수: 2']);
 		expectBridgeOrder(log, '[   ]', '[ X ]');
 	});
+	test('최종 종합 테스트', () => {
+		const logSpy = getLogSpy();
 
-  test('20 초과 숫자 입력시 에러 출력', () => {
+		mockRandoms([0, 1, 1, 0, 1, 1, 0, 0, 0]);
+		mockQuestions([
+			'9',
+			'a',
+			's',
+			'2',
+			'0',
+			' ',
+			'U',
+			's',
+			'4',
+			' ',
+			'R',
+			'u',
+			's',
+			'r',
+			'D',
+			'd',
+			'2',
+			'r',
+			'd',
+			'U',
+			'd',
+			'R',
+			'd',
+			'U',
+			'U',
+			'U',
+			'r',
+			'd',
+			'u',
+			'u',
+			'd',
+			'd',
+			'2',
+			'r',
+			'd',
+			'u',
+			'U',
+			'D',
+			'U',
+			'D',
+			'g',
+			'r',
+			'd',
+			'u',
+			'U',
+			'du=',
+			'd',
+			'u',
+			'u',
+			'd',
+			'd',
+			'R',
+			'u',
+			'2',
+			'r',
+			'd',
+			'u',
+			'u',
+			'D',
+			'U',
+			'D',
+			'R',
+			'd',
+			'u',
+			'u',
+			'd',
+			'u',
+			'u',
+			'd',
+			'd',
+			'd',
+		]);
+
+		const app = new App();
+		app.play();
+
+		const log = getOutput(logSpy);
+		expectLogContains(log, [
+			'최종 게임 결과',
+			'[   | O | O |   | O | O |   |   |   ]',
+			'[ O |   |   | O |   |   | O | O | O ]',
+			'게임 성공 여부: 성공',
+			'총 시도한 횟수: 10',
+		]);
+		expectBridgeOrder(log, '[   | O | O |   | O | O |   |   |   ]', '[ O |   |   | O |   |   | O | O | O ]');
+	});
+
+	test('20 초과 숫자 입력시 에러 출력', () => {
 		runException(['25']);
-  });
+	});
 
-
-  test('3 미만 숫자 입력시 에러 출력', () => {
+	test('3 미만 숫자 입력시 에러 출력', () => {
 		runException(['2']);
-  });
+	});
 });
