@@ -38,6 +38,7 @@ class Controller {
 	playRound() {
 		this.view.input.readMoving(directionInput => {
 			const direction = validation(directionInput, directionInputValidation, this.playRound.bind(this));
+			if (!direction) return;
 			this.model.move(direction);
 
 			const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
@@ -47,22 +48,26 @@ class Controller {
 			this.chooseNextStep(isAlive, isEnd);
 		});
 	}
-
 	chooseNextStep(isAlive, isEnd) {
-		if (!isAlive) return this.chooseRetryOrEnd();
-		if (isEnd) return this.endGame();
-
-		this.playRound();
+		if (!isAlive) {
+			this.chooseRetryOrEnd();
+		} else if (isEnd) {
+			this.endGame();
+		} else {
+			this.playRound();
+		}
 	}
 
 	chooseRetryOrEnd() {
 		this.view.input.readGameCommand(commandInput => {
 			const command = validation(commandInput, commandInputValidation, this.chooseRetryOrEnd.bind(this));
 
-			if (command === COMMAND.QUIT) return this.endGame();
-			
-			this.model.retry();
-			this.playRound();
+			if (command === COMMAND.QUIT) {
+				this.endGame();
+			} else if (command === COMMAND.RESTART) {
+				this.model.retry();
+				this.playRound();
+			}
 		});
 	}
 
