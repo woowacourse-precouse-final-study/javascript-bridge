@@ -49,25 +49,20 @@ class Controller {
 	}
 
 	chooseNextStep(isAlive, isEnd) {
-		if (!isAlive) {
-			this.chooseRetryOrEnd();
-		} else if (isEnd) {
-			this.endGame();
-		} else {
-			this.playRound();
-		}
+		if (!isAlive) return this.chooseRetryOrEnd();
+		if (isEnd) return this.endGame();
+
+		this.playRound();
 	}
 
 	chooseRetryOrEnd() {
 		this.view.input.readGameCommand(commandInput => {
 			const command = validation(commandInput, commandInputValidation, this.chooseRetryOrEnd.bind(this));
 
-			if (command === COMMAND.RESTART) {
-				this.model.retry();
-				this.playRound();
-			} else if (command === COMMAND.QUIT) {
-				this.endGame();
-			}
+			if (command === COMMAND.QUIT) return this.endGame();
+			
+			this.model.retry();
+			this.playRound();
 		});
 	}
 
