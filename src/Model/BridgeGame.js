@@ -1,4 +1,4 @@
-const {OUTPUT_RESULT :{right,wrong}} = require('../Constant');
+const {OUTPUT_RESULT :{right,wrong}, UPMOVE_DOWNMOVE_MESSAGE : {upMove,downMove}} = require('../Constant');
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -31,12 +31,12 @@ class BridgeGame {
   }
 
   ingMove(goOrStop, moveInput) {
-    if (moveInput === "U") {
-      this.upList.push(` ${goOrStop} `);
+    if (moveInput === upMove) {
+      this.upList.push(goOrStop);
       this.downList.push("   ");
     }
-    if (moveInput === "D") {
-      this.downList.push(` ${goOrStop} `);
+    if (moveInput === downMove) {
+      this.downList.push(goOrStop);
       this.upList.push("   ");
     }
   }

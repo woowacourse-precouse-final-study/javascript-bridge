@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const {INPUT_MESSAGE : {bridgeSizeMessage,MovingMessage,GameCommandMessage}} = require('../Constant')
+const {INPUT_MESSAGE : {bridgeSizeMessage,movingMessage,gameCommandMessage}} = require('../Constant')
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -16,7 +16,7 @@ const InputView = {
    */
   readMoving(moving) {
     MissionUtils.Console.readLine(
-      MovingMessage,
+      movingMessage,
       moving
     );
   },
@@ -26,7 +26,7 @@ const InputView = {
    */
   readGameCommand(gameCommand) {
     MissionUtils.Console.readLine(
-      GameCommandMessage,
+      gameCommandMessage,
       gameCommand
     );
   },
