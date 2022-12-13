@@ -29,7 +29,7 @@ const InputView = {
     Console.readLine(INPUT_QUERY.moving_space, (space) => {
       space = catchError(space, checkMovingSpace);
       if (space === "[ERROR]") return this.readMoving(movingSpaceCallback);
-      this.readGameCommand(space);
+      movingSpaceCallback(space)
     })
   },
 
