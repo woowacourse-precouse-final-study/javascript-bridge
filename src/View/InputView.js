@@ -1,4 +1,7 @@
 const {Console} = require('@woowacourse/mission-utils');
+const { catchError } = require("../util");
+const { checkBridgeSize, checkMovingSpace, checkGameCommand } = require("../Validation");
+
 const INPUT_QUERY = {
   bridge_size: '다리의 길이를 입력해주세요\n',
   moving_space: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
@@ -13,7 +16,9 @@ const InputView = {
    */
   readBridgeSize(bridgeSizeCallback) {
     Console.readLine(INPUT_QUERY.bridge_size, (size) => {
-      bridgeSizeCallback(size)
+      size = catchError(size, checkBridgeSize);
+      if (size === "[ERROR]") return this.readBridgeSize(bridgeSizeCallback);
+      bridgeSizeCallback(size);
     }) 
   },
 
@@ -22,7 +27,9 @@ const InputView = {
    */
   readMoving(movingSpaceCallback) {
     Console.readLine(INPUT_QUERY.moving_space, (space) => {
-      movingSpaceCallback(space);
+      space = catchError(space, checkMovingSpace);
+      if (space === "[ERROR]") return this.readMoving(movingSpaceCallback);
+      this.readGameCommand(space);
     })
   },
 
@@ -31,6 +38,8 @@ const InputView = {
    */
   readGameCommand(gameCommandCallback) {
     Console.readLine(INPUT_QUERY.game_command, (command) => {
+      command = catchError(command, checkGameCommand);
+      if (command === "[ERROR]") return this.readGameCommand(gameCommandCallback);
       gameCommandCallback(command);
     })
   },
