@@ -1,10 +1,8 @@
 const BridgeGame = require('../model/BridgeGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
-const BridgeMaker = require('../BridgeMaker');
-const BridgeRandomNumberGenerator = require('../utils/BridgeRandomNumberGenerator');
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_GUIDE_MESSAGES, COMMAND } = require('../utils/constants');
+const { COMMAND, STATUS } = require('../utils/constants');
 const {
   lengthInputValidation,
   directionInputValidation,
@@ -29,8 +27,7 @@ class Controller {
   createBridge() {
     this.view.input.readBridgeSize(sizeInput => {
       const size = validation(sizeInput, lengthInputValidation, this.createBridge.bind(this));
-      const answerBridge = BridgeMaker.makeBridge(size, BridgeRandomNumberGenerator.generate);
-      this.model.setState({ answerBridge });
+      this.model.makeBridge(size);
       this.playRound();
     });
   }
@@ -39,23 +36,24 @@ class Controller {
     this.view.input.readMoving(directionInput => {
       const direction = validation(directionInput, directionInputValidation, this.playRound.bind(this));
       if (!direction) return;
-      this.model.move(direction);
-
-      const { isAlive, currentLocation, answerBridge, currentUserBridge } = this.model.state;
-      const isEnd = currentLocation === answerBridge.length;
-
+      const currentUserBridge = this.model.move(direction);
       this.view.output.printMap(currentUserBridge);
-      this.chooseNextStep(isAlive, isEnd);
+      this.chooseNextStep();
     });
   }
 
-  chooseNextStep(isAlive, isEnd) {
-    if (!isAlive) {
-      this.chooseRetryOrEnd();
-    } else if (isEnd) {
-      this.endGame();
-    } else {
-      this.playRound();
+  chooseNextStep() {
+    const status = this.model.getStatus();
+    switch (status) {
+      case STATUS.DEAD:
+        this.chooseRetryOrEnd();
+        break;
+      case STATUS.END:
+        this.endGame();
+        break;
+      case STATUS.CONTINUE:
+        this.playRound();
+        break;
     }
   }
 
@@ -63,9 +61,8 @@ class Controller {
     this.view.input.readGameCommand(commandInput => {
       const command = validation(commandInput, commandInputValidation, this.chooseRetryOrEnd.bind(this));
 
-      if (command === COMMAND.QUIT) {
-        this.endGame();
-      } else if (command === COMMAND.RESTART) {
+      if (command === COMMAND.QUIT) this.endGame();
+      if (command === COMMAND.RESTART) {
         this.model.retry();
         this.playRound();
       }
@@ -73,7 +70,8 @@ class Controller {
   }
 
   endGame() {
-    this.view.output.printResult(this.model.state);
+    const result = this.model.getFinalResult();
+    this.view.output.printResult(result);
     Console.close();
   }
 }

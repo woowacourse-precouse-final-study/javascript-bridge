@@ -2,56 +2,56 @@ const { ERROR_MESSAGE, DIRECTION, LENGTH_RANGE, COMMAND } = require('./constants
 const { Console } = require('@woowacourse/mission-utils');
 
 const validation = (input, validationFunc, retryFunc) => {
-	let validatedInput;
+  let validatedInput;
 
-	try {
-		validatedInput = validationFunc(input);
-	} catch (err) {
-		Console.print(err.message);
-		retryFunc();
-	}
+  try {
+    validatedInput = validationFunc(input);
+  } catch (err) {
+    Console.print(err.message);
+    retryFunc();
+  }
 
-	return validatedInput;
+  return validatedInput;
 };
 
 const lengthInputValidation = strLength => {
-	const length = parseInt(strLength);
-	if (isNaN(length)) {
-		throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
-	}
-	if (length < 3 || length > 20) {
-		const { MIN, MAX } = LENGTH_RANGE;
-		throw new Error(ERROR_MESSAGE.INVALID_RANGE(MIN, MAX));
-	}
+  const length = parseInt(strLength);
+  if (isNaN(length)) {
+    throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
+  }
+  if (length < 3 || length > 20) {
+    const { MIN, MAX } = LENGTH_RANGE;
+    throw new Error(ERROR_MESSAGE.INVALID_RANGE(MIN, MAX));
+  }
 
-	return length;
+  return length;
 };
 
 const directionInputValidation = directionInput => {
-	const direction = directionInput.replace(/\s/g, '').toUpperCase();
-	const { UP, DOWN } = DIRECTION;
+  const direction = directionInput.replace(/\s/g, '').toUpperCase();
+  const { UP, DOWN } = DIRECTION;
 
-	if (direction !== UP && direction !== DOWN) {
-		throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([UP, DOWN]));
-	}
+  if (direction !== UP && direction !== DOWN) {
+    throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([UP, DOWN]));
+  }
 
-	return direction;
+  return direction;
 };
 
 const commandInputValidation = commandInput => {
-	const command = commandInput.replace(/\s/g, '').toUpperCase();
-	const { RESTART, QUIT } = COMMAND;
+  const command = commandInput.replace(/\s/g, '').toUpperCase();
+  const { RESTART, QUIT } = COMMAND;
 
-	if (command !== RESTART && command !== QUIT) {
-		throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([RESTART, QUIT]));
-	}
+  if (command !== RESTART && command !== QUIT) {
+    throw new Error(ERROR_MESSAGE.INVALID_INPUT_CHOICE([RESTART, QUIT]));
+  }
 
-	return command;
+  return command;
 };
 
 module.exports = {
-	validation,
-	lengthInputValidation,
-	directionInputValidation,
-	commandInputValidation,
+  validation,
+  lengthInputValidation,
+  directionInputValidation,
+  commandInputValidation,
 };
