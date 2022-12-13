@@ -51,8 +51,9 @@ class Controller {
         this.bridgeGame.downList
       );
       if (compareMove === "END") this.finalResult(success);
-      else if (compareMove) this.getMove();
-      else if (!compareMove) this.getRetryOrStop();
+      else {
+        compareMove ? this.getMove() : this.getRetryOrStop();
+      }
     } catch (error) {
       MissionUtils.Console.print(error);
       this.getMove();
@@ -72,7 +73,7 @@ class Controller {
       }
       if (reTryOrStop === stop) {
         this.finalResult(fail);
-        this.GameStop();
+        this.gameStop();
       }
     } catch (error) {
       MissionUtils.Console.print(error);
@@ -86,7 +87,7 @@ class Controller {
       successOrFailure,
       this.bridgeGame.retryCount
     );
-    this.GameStop();
+    this.gameStop();
   }
   gameStop() {
     MissionUtils.Console.close();
