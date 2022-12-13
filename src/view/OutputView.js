@@ -5,8 +5,8 @@ const { GAME_GUIDE_MESSAGES } = require('../utils/constants');
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
  */
 const OutputView = {
-	printMessage(message) {
-		Console.print(message);
+	printStart() {
+		Console.print(GAME_GUIDE_MESSAGES.START);
 	},
 
 	/**
