@@ -1,6 +1,6 @@
 const ERROR = {
-  not_number: "숫자를 입력해주세요.",
-  out_of_range: "3~20 사이의 숫자를 입력해주세요.",
+  not_number: "[ERROR] 숫자를 입력해야 합니다.",
+  out_of_range: "[ERROR] 다리 길이는 3부터 20 사이의 숫자여야 합니다.",
 };
 
 const checkBridgeSize = (size) => {
