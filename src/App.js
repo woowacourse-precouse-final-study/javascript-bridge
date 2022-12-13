@@ -1,6 +1,9 @@
+const Controller = require("./BridgeGame/BridgeGameController");
+
 class App {
   play() {
-    
+    const controller = new Controller();
+    controller.handleBridgeSize();
   }
 }
 
