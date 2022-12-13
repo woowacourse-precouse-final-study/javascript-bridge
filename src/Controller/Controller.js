@@ -5,7 +5,8 @@ const { generate } = require("../util/BridgeRandomNumberGenerator");
 const BridgeGame = require("../Model/BridgeGame");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validator = require("../util/Validator");
-const {SUCCESS_FAIL_MESSAGE : {success,fail},RETRY_STOP_MESSAGE : {retry,stop}} = require('../Constant')
+const {SUCCESS_FAIL_MESSAGE : {success,fail},RETRY_STOP_MESSAGE : {retry,stop}} = require('../util/Constant')
+
 class Controller {
   #answerBirdgeList;
   constructor() {

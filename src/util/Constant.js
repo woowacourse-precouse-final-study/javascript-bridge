@@ -31,4 +31,13 @@ const SUCCESS_FAIL_MESSAGE = {
   success : "성공",
   fail : "실패"
 }
-module.exports = {INPUT_MESSAGE,OUTPUT_MESSAGE,OUTPUT_RESULT,RETRY_STOP_MESSAGE,SUCCESS_FAIL_MESSAGE,UPMOVE_DOWNMOVE_MESSAGE}
+
+const ERROR_MESSAGE = {
+  errorSizeMessage : "[ERROR] 3과 20사이의 숫자만 입력하세요.",
+  errorNumberMessage :"[ERROR] 숫자만 입력하세요.",
+  errorUOrDMessage : '[ERROR] "U" 또는 "D"만 입력가능합니다.',
+  errorROrQMessage : '[ERROR] "R" 또는 "Q"만 입력가능합니다.'
+}
+
+
+module.exports = {INPUT_MESSAGE,OUTPUT_MESSAGE,OUTPUT_RESULT,RETRY_STOP_MESSAGE,SUCCESS_FAIL_MESSAGE,UPMOVE_DOWNMOVE_MESSAGE, ERROR_MESSAGE}

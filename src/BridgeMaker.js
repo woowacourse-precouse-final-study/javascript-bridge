@@ -1,3 +1,4 @@
+const {UPMOVE_DOWNMOVE_MESSAGE : {upMove, downMove}} = require('../src/util/Constant')
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -17,8 +18,8 @@ const BridgeMaker = {
 
     let answerBridgeList = [];
     randomList.forEach((value) => {
-      if (value === 1) answerBridgeList.push("U");
-      if (value === 0) answerBridgeList.push("D");
+      if (value === 1) answerBridgeList.push(upMove);
+      if (value === 0) answerBridgeList.push(downMove);
     });
 
     return answerBridgeList;
