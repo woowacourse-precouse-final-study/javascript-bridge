@@ -1,5 +1,5 @@
 const GAME_OUTCOME = {
-  success: '최종 성공',
+  success: '성공',
   move: '이동',
   fail: '실패',
 };

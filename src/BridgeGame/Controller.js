@@ -12,17 +12,13 @@ class Controller {
   getBridgeSize() {
     InputView.readBridgeSize((size) => {
       this.#size = size;
+      this.#bridgeGame = new BridgeGame(makeBridge(this.#size, generate));
+      
       return this.handleMovingSpace();
     });
   }
 
-  getAnswerBridge() {
-    const answerBridge = makeBridge(this.#size, generate)
-    return answerBridge;
-  }
-
   handleMovingSpace() {
-    this.#bridgeGame = new BridgeGame(this.getAnswerBridge());
     InputView.readMoving((space) => {
       const gameOutcome = this.#bridgeGame.decideMoveOrStop(space);
       if (gameOutcome === GAME_OUTCOME.success) Console.close();

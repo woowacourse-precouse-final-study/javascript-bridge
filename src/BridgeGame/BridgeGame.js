@@ -11,14 +11,16 @@ class BridgeGame {
 
   constructor(answerBridge) {
     this.#answerBridge = answerBridge;
+    console.log(this.#answerBridge)
     this.#bridgeIndex = 1;
     this.#attemptNumber = 1;
+    this.#mapMaker = new MapMaker();
   }
 
   decideMoveOrStop(space) {
-    if (space !== this.#answerBridge[this.#bridgeIndex - 1]) return this.stop();
-    if (this.#bridgeIndex === this.#answerBridge.length) return this.success();
-    return this.move();
+    if (space !== this.#answerBridge[this.#bridgeIndex - 1]) return this.stop(space);
+    if (this.#bridgeIndex === this.#answerBridge.length) return this.success(space);
+    return this.move(space);
   }
 
   /**
@@ -26,19 +28,19 @@ class BridgeGame {
    * <p>
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  move() {
+  move(space) {
     this.#bridgeIndex += 1;
-    this.#mapMaker.selectRightBridge(direction);
+    this.#mapMaker.selectRightBridge(space);
     return GAME_OUTCOME.move;
   }
 
-  stop() {
-    this.#mapMaker.selectWrongBridge(direction);
-    return GAME_OUTCOME.stop;
+  stop(space) {
+    this.#mapMaker.selectWrongBridge(space);
+    return GAME_OUTCOME.fail;
   }
 
-  success() {
-    this.#mapMaker.makeFinalSuccess(direction, this.#attemptNumber);
+  success(space) {
+    this.#mapMaker.makeFinalSuccess(space, this.#attemptNumber);
     return GAME_OUTCOME.success;
   }
 

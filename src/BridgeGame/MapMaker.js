@@ -10,15 +10,15 @@ class MapMaker {
     this.#lowerMapArray = [];
   }
 
-  selectRightBridge(direction) {
-    if (direction === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.RIGHT);
-    if (direction === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.RIGHT);
+  selectRightBridge(space) {
+    if (space === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.RIGHT);
+    if (space === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.RIGHT);
     OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
   }
 
-  selectWrongBridge(direction) {
-    if (direction === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.WRONG);
-    if (direction === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.WRONG);
+  selectWrongBridge(space) {
+    if (space === DIRECTION.UP) this.drawSignUpperMap(LETTER_SIGN.WRONG);
+    if (space === DIRECTION.DOWN) this.drawSignLowerMap(LETTER_SIGN.WRONG);
     OutputView.printMap(this.#upperMapArray, this.#lowerMapArray);
   }
 
@@ -32,8 +32,8 @@ class MapMaker {
     this.#lowerMapArray.push(sign);
   }
 
-  makeFinalSuccess(direction, attemptNumber) {
-    this.selectRightBridge(direction);
+  makeFinalSuccess(space, attemptNumber) {
+    this.selectRightBridge(space);
     OutputView.printResult(this.#upperMapArray, this.#lowerMapArray, attemptNumber);
   }
 
